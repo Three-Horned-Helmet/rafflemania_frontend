@@ -1,25 +1,26 @@
 import React from "react";
 
-function countDownGameStart() {
-  let countDownDate = new Date("Dec 08, 2021 16:37:52").getTime();
+const calculateTimeLeft = () => {
+  let year = new Date().getFullYear();
+  let difference = +new Date(`10/01/${year}`) - +new Date();
 
-  var myfunc = setInterval(function () {
-    var now = new Date().getTime();
-    var timeleft = countDownDate - now;
+  let timeLeft = {};
 
-    var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-    var hours = Math.floor(
-      (timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-  }, 1000);
+  if (difference > 0) {
+    timeLeft = {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+  }
 
-  return (
-    <div>
-      Raffle will start in {startTime.getTime() - new Date().getTime()} seconds
-    </div>
-  );
-}
+  return timeLeft;
+};
+
+const countDownGameStart = () => {
+  const time = calculateTimeLeft();
+  return <div>{time}</div>;
+};
 
 export default countDownGameStart;
