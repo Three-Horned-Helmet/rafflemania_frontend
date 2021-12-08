@@ -4,10 +4,11 @@ const Messages = ({ socket }) => {
   const [messages, setMessages] = useState({});
   
   useEffect(() => {
-    const messageListener = (message) => {
+    const messageListener = (data) => {
+      console.log(data, "<-- data");
       setMessages((prevMessages) => {
         const newMessages = {...prevMessages};
-        newMessages[message.id] = message;
+        newMessages[data] = data; //.id
         return newMessages;
       });
     };
@@ -20,12 +21,12 @@ const Messages = ({ socket }) => {
       });
     };
   
-    socket.on('message', messageListener);
+    socket.on('newChatMessage', messageListener);
     socket.on('deleteMessage', deleteMessageListener);
     socket.emit('getMessages');
 
     return () => {
-      socket.off('message', messageListener);
+      socket.off('newChatMessage', messageListener);
       socket.off('deleteMessage', deleteMessageListener);
     };
   }, [socket]);
@@ -33,16 +34,21 @@ const Messages = ({ socket }) => {
   return (
     <div className="">
       {[...Object.values(messages)]
+        .map(a=> {
+          console.log(a)
+          return a
+        })
         .sort((a, b) => a.time - b.time)
         .map((message) => (
           <div
-            key={message.id}
+            /* key={message.id} */
             className="message-container"
             title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
           >
-            <span className="">{message.user.name}:</span>
-            <span className="">{message.value}</span>
-            <span className="">{new Date(message.time).toLocaleTimeString()}</span>
+            {/* <span className="">{message.user.name}:</span> */}
+            {/* <span className="">{message.value}</span> */}
+            {/* <span className="">{new Date(message.time).toLocaleTimeString()}</span> */}
+            <span className="">{message}</span>
           </div>
         ))
       }
