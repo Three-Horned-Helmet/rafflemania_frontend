@@ -3,8 +3,8 @@ import React, {useEffect, useState} from 'react'
 const Error = ({socket}) => {
     const [error, setError] = useState("");
     const handleError = (err) => {
-    console.error("ERROR: ",err)
-    setError(err)
+    console.error("ERROR: ",err.message)
+    setError(err.message)
     setTimeout(() => {
         setError("")
     },5000)

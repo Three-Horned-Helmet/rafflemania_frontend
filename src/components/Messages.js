@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
 import React, { useState, useEffect, useRef } from "react";
 import MessageInput from "./MessageInput";
+
 const Messages = ({ socket }) => {
   const [data, setData] = useState({});
   const chatContainer = useRef(null);
@@ -29,19 +30,21 @@ const Messages = ({ socket }) => {
       chatContainer.current.scrollTop = chatContainer.current.scrollHeight
     };
 
-    socket.on("newChatMessage", messageListener);
-
-    socket.on("connected", (onLoadData) => {
+    const connectedListener = (onLoadData) => {
       const processedMessages = data
       onLoadData.messages?.forEach(msg => {
         processedMessages[msg.message.id] = msg.message
       })
       setData({...processedMessages})
-    });
+    }
+
+    socket.on("newChatMessage", messageListener);
+
+    socket.on("connected", connectedListener);
 
     return () => {
       socket.off("newChatMessage", messageListener);
-      socket.off("connected");
+      socket.off("connected", connectedListener);
     };
   }, [socket]);
 
