@@ -5,7 +5,7 @@ function username() {
     <form>
       <label>
         Name:
-        <input type="text" name="name"></input>
+        <input type="text" placeholder=" Username" name="name"></input>
       </label>
       <input type="submit" value="Submit"></input>
     </form>

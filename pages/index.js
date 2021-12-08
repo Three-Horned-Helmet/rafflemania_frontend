@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Username from "../src/components/username";
+import UserCounter from "../src/components/userCounter";
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
@@ -21,8 +22,8 @@ function useSocket(url) {
 }
 
 export default function Home() {
-  const socket = useSocket('http://127.0.0.1:9080')
-  const [response, setResponse] = useState("")
+  const socket = useSocket("http://127.0.0.1:9080");
+  const [response, setResponse] = useState("");
 
   useEffect(() => {
     const handleEvent = (payload) => {
@@ -30,25 +31,24 @@ export default function Home() {
       // HelloWorld
     };
     if (socket) {
-      socket.on('SOME_EVENT', handleEvent)
+      socket.on("SOME_EVENT", handleEvent);
 
-      socket.on("FromAPI", data => {
+      socket.on("FromAPI", (data) => {
         setResponse(data);
-    });
+      });
     }
-  }, [socket])
-  
-  
+  }, [socket]);
+
   return (
     <div>
       <Head>
         <Username />
-        <h1>Hei</h1>
+        <UserCounter count="0" />
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Hei</h1>
-      { socket ? (
+      {socket ? (
         <div className="">
           <Messages socket={socket} />
           <MessageInput socket={socket} />
