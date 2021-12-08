@@ -25,12 +25,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {socket ? (
+<<<<<<< HEAD
         <main className=" border-red-500 border-4 h-screen">
           <h1 className="text-center text-5xl">RAFFLEMANIA</h1>
           <div className="mt-4 flex justify-center"> 
             <Username socket={socket} />
           </div>
           <UserCounter count="0" />
+=======
+        <>
+          <Username socket={socket} />
+          <UserCounter socket={socket} />
+>>>>>>> bc934090ce5b09948746d3fc14b9ed50d9650d46
           <CountDownGameStart />
           <div className="flex justify-between border-blue-500 border-4 h-2/3" >  {/* Raffle wrapper */}
             <Raffle socket={socket} />
