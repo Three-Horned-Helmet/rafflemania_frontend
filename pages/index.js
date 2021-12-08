@@ -21,7 +21,8 @@ function useSocket(url) {
 }
 
 export default function Home() {
-  const socket = useSocket("http://127.0.0.1:9080");
+  const socket = useSocket('http://127.0.0.1:9080')
+  const [response, setResponse] = useState("")
 
   useEffect(() => {
     const handleEvent = (payload) => {
@@ -29,10 +30,15 @@ export default function Home() {
       // HelloWorld
     };
     if (socket) {
-      socket.on("SOME_EVENT", handleEvent);
-    }
-  }, [socket]);
+      socket.on('SOME_EVENT', handleEvent)
 
+      socket.on("FromAPI", data => {
+        setResponse(data);
+    });
+    }
+  }, [socket])
+  
+  
   return (
     <div>
       <Head>
@@ -41,6 +47,15 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <h1>Hei</h1>
+      { socket ? (
+        <div className="">
+          <Messages socket={socket} />
+          <MessageInput socket={socket} />
+        </div>
+      ) : (
+        <div>Not Connected</div>
+      )}
     </div>
   );
 }
