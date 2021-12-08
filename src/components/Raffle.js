@@ -22,9 +22,15 @@ const Raffle = ({socket}) => {
 
     socket.on('tooFewUsers', handleTooFewRaffleUsers);
     socket.on("newRaffle", (data) => handleNewRaffle(data, true))
-    socket.on("raffleVoteAdded", () => console.log("raffleVoteAdded")) // user gets vote
-    socket.on("raffleEnded", (data) => handleNewRaffle(data, false))
+    socket.on("youAreARaffler", () => console.log("youarearaffler")) // You are a raffler
+
+    socket.on("raffleVoteAdded", () => console.log("raffleVoteAdded")) // a user gets a vote
+
+    socket.on("newRaffleMessage", () => console.log("newRaffleMessage")) // You are a raffler
+    socket.on("raffleEnded", (data) => handleNewRaffle(data, false)) // all votes are in, the raffle is over
     
+    socket.emit("raffleVote", "foo") // vote for user, display name
+    socket.emit("writeRaffleMessage", "foo") // raffler gets to send message
     
     {/* <button onClick={() => socket.emit("raffleVote", "le mao")}> Click </button> */}
     
