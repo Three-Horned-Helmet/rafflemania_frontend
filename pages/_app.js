@@ -1,12 +1,7 @@
-import GlobalStyles from "src/components/GlobalStyles";
+import "tailwindcss/tailwind.css";
 
-const App = ({ Component, pageProps }) => {
-  return (
-    <>
-      <GlobalStyles />
-      <Component {...pageProps} />
-    </>
-  );
-};
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
 
-export default App;
+export default MyApp
