@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const calculateTimeLeft = () => {
-  let year = new Date().getFullYear();
-  let difference = +new Date(`12/10/${year}`) - new Date();
+  const year = new Date().getFullYear();
+  const difference = +new Date(`12/10/${year}`) - new Date();
 
-  let timeLeft = {};
-
+  const timeLeft = {};
   if (difference > 0) {
     timeLeft = {
       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -18,13 +17,13 @@ const calculateTimeLeft = () => {
   return timeLeft;
 };
 
-const countDownGameStart = () => {
+const CountDownGameStart = () => {
   const [time, setTime] = useState(calculateTimeLeft());
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(calculateTimeLeft());
-      console.log(calculateTimeLeft().seconds);
-    }, 100000);
+      const timeLeft = calculateTimeLeft()
+      setTime(timeLeft);
+    }, 1000);
     return () => {
       clearInterval(interval);
     };
@@ -37,4 +36,4 @@ const countDownGameStart = () => {
   );
 };
 
-export default countDownGameStart;
+export default CountDownGameStart;

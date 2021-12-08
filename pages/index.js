@@ -1,10 +1,13 @@
+import "tailwindcss/tailwind.css";
+import React, { useState, useEffect } from "react";
+
 import Head from "next/head";
 import Username from "../src/components/Username";
 import UserCounter from "../src/components/UserCounter";
-import CountDownGameStart from "../src/components/countDownGameStart";
+import CountDownGameStart from "../src/components/CountDownGameStart";
 import Messages from "../src/components/Messages";
 import MessageInput from "../src/components/MessageInput";
-import React, { useState, useEffect } from "react";
+import Raffle from "../src/components/Raffle";
 import io from "socket.io-client";
 
 export default function Home() {
@@ -17,7 +20,7 @@ export default function Home() {
   }, [setSocket]);
 
   return (
-    <div>
+    <div className="">
       <Head>
         <title>Rafflemania</title>
         <link rel="icon" href="/favicon.ico" />
@@ -27,6 +30,7 @@ export default function Home() {
           <Username socket={socket} />
           <UserCounter count="0" />
           <CountDownGameStart />
+          <Raffle socket={socket} />
           <Messages socket={socket} />
           <MessageInput socket={socket} />
         </>
