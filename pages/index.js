@@ -25,7 +25,7 @@ export default function Home() {
       {socket ? (
         <>
           <Username socket={socket} />
-          <UserCounter count="0" />
+          <UserCounter socket={socket} />
           <CountDownGameStart />
           <Messages socket={socket} />
           <MessageInput socket={socket} />
