@@ -1,5 +1,5 @@
 import Head from "next/head";
-
+import Username from "../src/components/username";
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
@@ -42,6 +42,7 @@ export default function Home() {
   return (
     <div>
       <Head>
+        <Username />
         <h1>Hei</h1>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
