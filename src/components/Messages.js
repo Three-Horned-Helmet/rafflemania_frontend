@@ -30,15 +30,13 @@ const Messages = ({ socket }) => {
     };
 
     socket.on("newChatMessage", messageListener);
-    // socket.on('connected', messageListener);
 
     socket.on("connected", (onLoadData) => {
       const processedMessages = data
       onLoadData.messages?.forEach(msg => {
         processedMessages[msg.message.id] = msg.message
       })
-
-      setData(processedMessages)
+      setData({...processedMessages})
     });
 
     return () => {
