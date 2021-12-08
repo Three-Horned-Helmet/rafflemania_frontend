@@ -26,14 +26,24 @@ const Messages = ({ socket }) => {
         return newMessages;
       });
 
-      chatContainer.current.scrollTop = chatContainer.current.clientHeight
+      chatContainer.current.scrollTop = chatContainer.current.scrollHeight
     };
 
     socket.on("newChatMessage", messageListener);
     // socket.on('connected', messageListener);
 
+    socket.on("connected", (onLoadData) => {
+      const processedMessages = data
+      onLoadData.messages?.forEach(msg => {
+        processedMessages[msg.message.id] = msg.message
+      })
+
+      setData(processedMessages)
+    });
+
     return () => {
       socket.off("newChatMessage", messageListener);
+      socket.off("connected");
     };
   }, [socket]);
 
