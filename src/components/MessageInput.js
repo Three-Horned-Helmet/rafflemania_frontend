@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const NewMessage = ({socket}) => {
+const MessageInput = ({socket}) => {
   const [value, setValue] = useState('');
   const submitForm = (e) => {
     e.preventDefault();
@@ -22,4 +22,4 @@ const NewMessage = ({socket}) => {
   );
 };
 
-export default NewMessage;
+export default MessageInput;

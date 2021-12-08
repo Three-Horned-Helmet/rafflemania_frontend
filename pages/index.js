@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Username from "../src/components/Username";
-import Username from "../src/components/Messages";
-import Username from "../src/components/NewMessages";
+import Messages from "../src/components/Messages";
+import MessageInput from "../src/components/MessageInput";
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 

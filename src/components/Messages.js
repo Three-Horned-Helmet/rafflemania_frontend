@@ -1,8 +1,8 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 
 const Messages = ({ socket }) => {
   const [messages, setMessages] = useState({});
-
+  
   useEffect(() => {
     const messageListener = (message) => {
       setMessages((prevMessages) => {
