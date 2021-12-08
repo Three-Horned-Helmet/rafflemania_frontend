@@ -17,7 +17,7 @@ const MessageInput = ({ socket, socketUrl }) => {
   return (
     <form onSubmit={submitForm}>
       <input
-        className='focus:border-green-500 outline-none border-purple-500 rounded border-2 pl-2 mb-2 mr-2'
+        className='focus:border-green-500 outline-none border-purple-500 rounded border-2 pl-2 my-2 w-full'
         autoFocus
         value={value}
         placeholder='Skriv melding baby!'

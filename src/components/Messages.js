@@ -1,8 +1,9 @@
 import "tailwindcss/tailwind.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MessageInput from "./MessageInput";
 const Messages = ({ socket }) => {
   const [data, setData] = useState({});
+  const chatContainer = useRef(null);
 
   const stringToColor = (str) => {
     let hash = 0;
@@ -24,6 +25,8 @@ const Messages = ({ socket }) => {
         newMessages[data.id] = data;
         return newMessages;
       });
+
+      chatContainer.current.scrollTop = chatContainer.current.clientHeight
     };
 
     socket.on("newChatMessage", messageListener);
@@ -35,7 +38,7 @@ const Messages = ({ socket }) => {
   }, [socket]);
 
   return (
-    <div className="w-2/5 border-green-500 border-4 h-full flex flex-col pl-2">
+    <div ref={chatContainer} className="w-2/5 border-green-500 border-4 h-full flex flex-col px-2 overflow-auto">
       {[...Object.values(data)]
         .sort((a, b) => a.dateMessage - b.dateMessage)
         .map((d) => {
@@ -57,7 +60,7 @@ const Messages = ({ socket }) => {
             </div>
           );
         })}
-      <div className="mt-auto ml-auto">
+      <div className="w-full mt-auto">
         <MessageInput socket={socket} socketUrl="writeChatMessage" />
       </div>
     </div>

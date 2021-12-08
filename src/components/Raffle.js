@@ -68,7 +68,7 @@ const Raffle = ({ socket }) => {
   }, [socket]);
 
   return (
-    <div className='flex flex-col w-2/5 border-purple-500 border-4 h-full'>
+    <div className='flex flex-col w-2/5 border-purple-500 border-4 h-full overflow-auto'>
       {isTooFewUsers && <p>Raffle not started, too few users</p>}
       {raffleStarted && <p>RAFFLE STARTED</p>}
       {[...Object.values(data)]
