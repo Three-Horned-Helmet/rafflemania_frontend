@@ -22,7 +22,8 @@ const Raffle = ({ socket }) => {
   };
 
   useEffect(() => {
-    const raffleMessageListener = (data) => {
+    const messageListener = (data) => {
+      console.log(data);
       setData((prevMessages) => {
         const newMessages = { ...prevMessages };
         newMessages[data.id] = data;
@@ -45,7 +46,7 @@ const Raffle = ({ socket }) => {
     socket.on("tooFewUsers", handleTooFewRaffleUsers);
     socket.on("newRaffle", (data) => toggleRaffle(data, true));
     socket.on("youAreARaffler", () => console.log("youarearaffler")); // You are a raffler
-    socket.on("newRaffleMessage", raffleMessageListener);
+    socket.on("newRaffleMessage", messageListener);
 
     socket.on("raffleVoteAdded", () => console.log("raffleVoteAdded")); // a user gets a vote
 
@@ -62,12 +63,12 @@ const Raffle = ({ socket }) => {
     return () => {
       socket.off("tooFewUsers", handleTooFewRaffleUsers);
       socket.off("newRaffle", toggleRaffle);
-      socket.off("newRaffleMessage", raffleMessageListener);
+      socket.off("newRaffleMessage", messageListener);
     };
   }, [socket]);
 
   return (
-    <div className="w-2/5 border-purple-500 border-4 h-full">
+    <div className='flex flex-col w-2/5 border-purple-500 border-4 h-full'>
       {isTooFewUsers && <p>Raffle not started, too few users</p>}
       {raffleStarted && <p>RAFFLE STARTED</p>}
       {[...Object.values(data)]
@@ -78,21 +79,23 @@ const Raffle = ({ socket }) => {
           return (
             <div
               key={d.id}
-              className="pl-1"
+              className='pl-1'
               title={`Sent at ${new Date(d.dateMessage).toLocaleTimeString()}`}
             >
-              <span className="">
+              <span className=''>
                 {new Date(d.dateMessage).toLocaleTimeString()}
               </span>
-              <span style={{ color: displayColor }} className="ml-2">
+              <span style={{ color: displayColor }} className='ml-2'>
                 {displayName}:
               </span>
-              <span className="ml-2 break-words">{d.message}</span>
+              <span className='ml-2 break-words'>{d.message}</span>
             </div>
           );
         })}
-      {/* {rafflers.map((raffler, index) => <p key={index}>{raffler}</p>)} */}
-      <MessageInput socket={socket} socketUrl="writeRaffleMessage" />
+      <div className='mt-auto ml-auto'>
+        {/* {rafflers.map((raffler, index) => <p key={index}>{raffler}</p>)} */}
+        <MessageInput socket={socket} socketUrl='writeRaffleMessage' />
+      </div>
     </div>
   );
 };
