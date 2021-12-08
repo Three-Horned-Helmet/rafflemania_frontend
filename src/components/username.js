@@ -1,6 +1,6 @@
 import React from "react";
 
-function Username() {
+const Username = () => {
   return (
     <form>
       <label>
