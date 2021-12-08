@@ -1,6 +1,6 @@
 import React from "react";
 
-function username() {
+function Username() {
   return (
     <form>
       <label>
@@ -12,4 +12,4 @@ function username() {
   );
 }
 
-export default username;
+export default Username;
