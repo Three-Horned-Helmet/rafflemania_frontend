@@ -1,7 +1,6 @@
 import Head from "next/head";
-import Username from "../src/components/Username";
-import Messages from "../src/components/Messages";
-import MessageInput from "../src/components/MessageInput";
+import Username from "../src/components/username";
+import UserCounter from "../src/components/userCounter";
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
@@ -25,10 +24,14 @@ export default function Home() {
       </Head>
       {/* <Username /> */}
       { socket ? (
-        <div className="">
-          <Messages socket={socket} />
-          <MessageInput socket={socket} />
-        </div>
+        <>
+          <Username />
+          <UserCounter count="0" />
+          <div className="">
+            <Messages socket={socket} />
+            <MessageInput socket={socket} />
+          </div>
+        </>
       ) : (
         <div>Not Connected</div>
       )}
