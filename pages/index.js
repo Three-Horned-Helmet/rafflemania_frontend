@@ -8,7 +8,7 @@ import io from "socket.io-client";
 
 export default function Home() {
   const [socket, setSocket] = useState(null);
-  const [response, setResponse] = useState("")
+  console.log(socket)
 
   useEffect(() => {
     const newSocket = io("http://192.168.0.2:5000");

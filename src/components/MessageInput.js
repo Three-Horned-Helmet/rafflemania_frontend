@@ -4,7 +4,8 @@ const MessageInput = ({socket}) => {
   const [value, setValue] = useState('');
   const submitForm = (e) => {
     e.preventDefault();
-    socket.emit('writeChatMessage', value);
+    const b = socket.emit('writeChatMessage', value);
+    console.log(b)
     setValue('');
   };
 

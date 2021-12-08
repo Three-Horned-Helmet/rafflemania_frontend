@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react'; 
 
 const Messages = ({ socket }) => {
-  const [messages, setMessages] = useState({});
+  const [data, setData] = useState({});
   
   useEffect(() => {
     const messageListener = (data) => {
-      console.log(data, "<-- data");
-      setMessages((prevMessages) => {
+      setData((prevMessages) => {
         const newMessages = {...prevMessages};
-        newMessages[data] = data; //.id
+        newMessages[data.id] = data; 
         return newMessages;
       });
     };
   
     const deleteMessageListener = (messageID) => {
-      setMessages((prevMessages) => {
+      setData((prevMessages) => {
         const newMessages = {...prevMessages};
         delete newMessages[messageID];
         return newMessages;
@@ -23,7 +22,7 @@ const Messages = ({ socket }) => {
   
     socket.on('newChatMessage', messageListener);
     socket.on('deleteMessage', deleteMessageListener);
-    socket.emit('getMessages');
+    socket.on('connected', messageListener);
 
     return () => {
       socket.off('newChatMessage', messageListener);
@@ -33,22 +32,17 @@ const Messages = ({ socket }) => {
 
   return (
     <div className="">
-      {[...Object.values(messages)]
-        .map(a=> {
-          console.log(a)
-          return a
-        })
-        .sort((a, b) => a.time - b.time)
-        .map((message) => (
+      {[...Object.values(data)]
+        .sort((a, b) => a.dateMessage - b.dateMessage)
+        .map((d) => (
           <div
-            /* key={message.id} */
+            key={d.id}
             className="message-container"
-            title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
+            title={`Sent at ${new Date(d.dateMessage).toLocaleTimeString()}`}
           >
             {/* <span className="">{message.user.name}:</span> */}
-            {/* <span className="">{message.value}</span> */}
-            {/* <span className="">{new Date(message.time).toLocaleTimeString()}</span> */}
-            <span className="">{message}</span>
+            <span className="">{new Date(d.dateMessage).toLocaleTimeString()}</span>
+            <span className="">{d.message}</span>
           </div>
         ))
       }
