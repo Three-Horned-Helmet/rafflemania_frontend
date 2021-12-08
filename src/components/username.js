@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const Username = ({ socket }) => {
   const [username, setUsername] = useState("");
   const [validUserName, setValidUsername] = useState("");
+  const [placeHolderName, setPlaceHolderName] = useState("");
 
   useEffect(() => {
     const handleCheckDisplayName = (data) => {
@@ -14,6 +15,7 @@ const Username = ({ socket }) => {
 
   const submitDisplayName = (e) => {
     socket.emit("submitDisplayName", username);
+    setPlaceHolderName(username);
     setUsername("");
     e.preventDefault();
   };
@@ -31,9 +33,10 @@ const Username = ({ socket }) => {
         Username:
         <input
           autoFocus
-          background-color="red"
           value={username}
-          placeholder=" Tester"
+          placeholder={
+            validUserName === "true" ? placeHolderName : " Your username"
+          }
           onChange={(e) => {
             checkDisplayName(e);
           }}
