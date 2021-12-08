@@ -18,7 +18,6 @@ const Messages = ({ socket }) => {
 
   useEffect(() => {
     const messageListener = (data) => {
-      console.log(data);
       setData((prevMessages) => {
         const newMessages = { ...prevMessages };
         newMessages[data.id] = data;
@@ -35,7 +34,11 @@ const Messages = ({ socket }) => {
   }, [socket]);
 
   return (
+<<<<<<< HEAD
     <div className="w-2/5 border-green-500 border-4 h-full flex flex-colpl-4">
+=======
+    <div className='w-2/5 border-green-500 border-4 h-full flex flex-col pl-2'>
+>>>>>>> a679c1d4f7a1f7b87505e58ec04bab1ef16948b2
       {[...Object.values(data)]
         .sort((a, b) => a.dateMessage - b.dateMessage)
         .map((d) => {
@@ -44,7 +47,11 @@ const Messages = ({ socket }) => {
           return (
             <div
               key={d.id}
+<<<<<<< HEAD
               className="message-container pl-2"
+=======
+              className='pl-1'
+>>>>>>> a679c1d4f7a1f7b87505e58ec04bab1ef16948b2
               title={`Sent at ${new Date(d.dateMessage).toLocaleTimeString()}`}
             >
               <span className="">
@@ -53,7 +60,11 @@ const Messages = ({ socket }) => {
               <span style={{ color: displayColor }} className="ml-2">
                 {displayName}:
               </span>
+<<<<<<< HEAD
               <span className="ml-2">{d.message}</span>
+=======
+              <span className='ml-2 break-words'>{d.message}</span>
+>>>>>>> a679c1d4f7a1f7b87505e58ec04bab1ef16948b2
             </div>
           );
         })}
