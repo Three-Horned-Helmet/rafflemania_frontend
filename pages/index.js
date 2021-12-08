@@ -1,6 +1,8 @@
 import Head from "next/head";
-import Username from "../src/components/username";
-import UserCounter from "../src/components/userCounter";
+import Username from "../src/components/Username";
+import UserCounter from "../src/components/UserCounter";
+import Messages from "../src/components/Messages";
+import MessageInput from "../src/components/MessageInput";
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
@@ -22,19 +24,17 @@ export default function Home() {
         <title>Rafflemania</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <Username /> */}
       { socket ? (
         <>
           <Username />
           <UserCounter count="0" />
-          <div className="">
-            <Messages socket={socket} />
-            <MessageInput socket={socket} />
-          </div>
+          <Messages socket={socket} />
+          <MessageInput socket={socket} />
         </>
       ) : (
         <div>Not Connected</div>
-      )}
+        )}
     </div>
   );
 }
+

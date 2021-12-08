@@ -1,7 +1,7 @@
 import React from "react";
 
-function userCounter(props) {
+function UserCounter(props) {
   return <div>There are {props.count} participating users</div>;
 }
 
-export default userCounter;
+export default UserCounter;
