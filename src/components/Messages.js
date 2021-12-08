@@ -22,7 +22,7 @@ const Messages = ({ socket }) => {
   
     socket.on('newChatMessage', messageListener);
     socket.on('deleteMessage', deleteMessageListener);
-    socket.on('connected', messageListener);
+    // socket.on('connected', messageListener);
 
     return () => {
       socket.off('newChatMessage', messageListener);

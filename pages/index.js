@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Username from "../src/components/Username";
 import UserCounter from "../src/components/UserCounter";
+import CountDownGameStart from "../src/components/countDownGameStart";
 import Messages from "../src/components/Messages";
 import MessageInput from "../src/components/MessageInput";
 import React, { useState, useEffect } from "react";
@@ -15,25 +16,23 @@ export default function Home() {
     return () => newSocket.close();
   }, [setSocket]);
 
-  
-  
   return (
     <div>
       <Head>
         <title>Rafflemania</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      { socket ? (
+      {socket ? (
         <>
-          <Username />
+          <Username socket={socket} />
           <UserCounter count="0" />
+          <CountDownGameStart />
           <Messages socket={socket} />
           <MessageInput socket={socket} />
         </>
       ) : (
         <div>Not Connected</div>
-        )}
+      )}
     </div>
   );
 }
-
