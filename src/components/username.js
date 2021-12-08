@@ -30,10 +30,11 @@ const Username = ({ socket }) => {
       <label>
         Username:
         <input
+          className="focus:border-green-500 outline-none border-black border-t-0 border-l-0 border-r-0 border-2 pl-2"
           autoFocus
           value={username}
           placeholder={
-            validUserName === "true" ? placeHolderName : " Your username"
+            validUserName === "true" ? placeHolderName : "Your username"
           }
           onChange={(e) => {
             checkDisplayName(e);

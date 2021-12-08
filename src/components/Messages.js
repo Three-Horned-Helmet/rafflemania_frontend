@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
-
+import MessageInput from "./MessageInput";
 const Messages = ({ socket }) => {
   const [data, setData] = useState({});
   
@@ -31,7 +31,7 @@ const Messages = ({ socket }) => {
   }, [socket]);
 
   return (
-    <div className="">
+    <div className="w-2/5 border-green-500 border-4 h-full flex flex-col">
       {[...Object.values(data)]
         .sort((a, b) => a.dateMessage - b.dateMessage)
         .map((d) => (
@@ -46,6 +46,9 @@ const Messages = ({ socket }) => {
           </div>
         ))
       }
+      <div className="mt-auto ml-auto">
+      <MessageInput socket={socket} />
+      </div>
     </div>
   );
 }

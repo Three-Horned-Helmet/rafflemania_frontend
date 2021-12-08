@@ -6,7 +6,6 @@ import Username from "../src/components/Username";
 import UserCounter from "../src/components/UserCounter";
 import CountDownGameStart from "../src/components/CountDownGameStart";
 import Messages from "../src/components/Messages";
-import MessageInput from "../src/components/MessageInput";
 import Raffle from "../src/components/Raffle";
 import io from "socket.io-client";
 
@@ -20,23 +19,27 @@ export default function Home() {
   }, [setSocket]);
 
   return (
-    <div className="">
+    <>
       <Head>
         <title>Rafflemania</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {socket ? (
-        <>
-          <Username socket={socket} />
+        <main className=" border-red-500 border-4 h-screen">
+          <h1 className="text-center text-5xl">RAFFLEMANIA</h1>
+          <div className="mt-4 flex justify-center"> 
+            <Username socket={socket} />
+          </div>
           <UserCounter count="0" />
           <CountDownGameStart />
-          <Raffle socket={socket} />
-          <Messages socket={socket} />
-          <MessageInput socket={socket} />
-        </>
+          <div className="flex justify-between border-blue-500 border-4 h-2/3" >  {/* Raffle wrapper */}
+            <Raffle socket={socket} />
+            <Messages socket={socket} />
+          </div>
+        </main>
       ) : (
         <div>Not Connected</div>
       )}
-    </div>
+    </>
   );
 }

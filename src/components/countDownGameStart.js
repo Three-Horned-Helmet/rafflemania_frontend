@@ -30,7 +30,7 @@ const CountDownGameStart = () => {
   }, []);
   return (
     <div>
-      Game starts in {time.days} days, {time.hours} hours, {time.minutes}{" "}
+      Raffle starts in {time.days} days, {time.hours} hours, {time.minutes}{" "}
       minutes and {time.seconds} seconds
     </div>
   );

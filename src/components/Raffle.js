@@ -22,10 +22,11 @@ const Raffle = ({socket}) => {
 
     socket.on('tooFewUsers', handleTooFewRaffleUsers);
     socket.on("newRaffle", (data) => handleNewRaffle(data, true))
-    socket.on("raffleVoteAdded", ()=> console.log("raffleVoteAdded")) // user gets vote
+    socket.on("raffleVoteAdded", () => console.log("raffleVoteAdded")) // user gets vote
     socket.on("raffleEnded", (data) => handleNewRaffle(data, false))
     
     
+    {/* <button onClick={() => socket.emit("raffleVote", "le mao")}> Click </button> */}
     
     return () => {
       socket.off('tooFewUsers', handleTooFewRaffleUsers);
@@ -34,11 +35,10 @@ const Raffle = ({socket}) => {
     }, [socket]);
   
     return (
-        <div className="">
+        <div className="w-2/5 border-purple-500 border-4 h-full">
             {isTooFewUsers && <p>Raffle not started, too few users</p>}
             {raffleStarted && <p>RAFFLE STARTED</p>}
-            <button onClick={() => socket.emit("raffleVote", "le mao")}> Click </button>
-            {rafflers.map((raffler, index) => <p key={index}>{raffler}</p>)}
+            {/* {rafflers.map((raffler, index) => <p key={index}>{raffler}</p>)} */}
         </div>
     )
 }
