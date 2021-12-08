@@ -34,7 +34,11 @@ const Messages = ({ socket }) => {
   }, [socket]);
 
   return (
+<<<<<<< HEAD
     <div className="w-2/5 border-green-500 border-4 h-full flex flex-col pl-2">
+=======
+    <div className='w-2/5 border-green-500 border-4 h-full flex flex-col pl-2'>
+>>>>>>> e00e2c0900c68aaa10fef1e322d886a5ea0f0f75
       {[...Object.values(data)]
         .sort((a, b) => a.dateMessage - b.dateMessage)
         .map((d) => {
@@ -43,21 +47,29 @@ const Messages = ({ socket }) => {
           return (
             <div
               key={d.id}
+<<<<<<< HEAD
               className="pl-1"
+=======
+              className='pl-1'
+>>>>>>> e00e2c0900c68aaa10fef1e322d886a5ea0f0f75
               title={`Sent at ${new Date(d.dateMessage).toLocaleTimeString()}`}
             >
-              <span className="">
+              <span className=''>
                 {new Date(d.dateMessage).toLocaleTimeString()}
               </span>
-              <span style={{ color: displayColor }} className="ml-2">
+              <span style={{ color: displayColor }} className='ml-2'>
                 {displayName}:
               </span>
+<<<<<<< HEAD
               <span className="ml-2 break-words">{d.message}</span>
+=======
+              <span className='ml-2 break-words'>{d.message}</span>
+>>>>>>> e00e2c0900c68aaa10fef1e322d886a5ea0f0f75
             </div>
           );
         })}
-      <div className="mt-auto ml-auto">
-        <MessageInput socket={socket} socketUrl="writeChatMessage" />
+      <div className='mt-auto ml-auto'>
+        <MessageInput socket={socket} socketUrl='writeChatMessage' />
       </div>
     </div>
   );
