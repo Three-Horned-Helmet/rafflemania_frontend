@@ -42,7 +42,7 @@ const Messages = ({ socket }) => {
           >
             {/* <span className="">{message.user.name}:</span> */}
             <span className="">{new Date(d.dateMessage).toLocaleTimeString()}</span>
-            <span className="">{d.message}</span>
+            <p className="">{d.message}</p>
           </div>
         ))
       }

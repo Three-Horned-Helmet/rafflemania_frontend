@@ -7,7 +7,6 @@ const Username = ({ socket }) => {
 
   useEffect(() => {
     const handleCheckDisplayName = (data) => {
-      console.log(data);
       setValidUsername(data);
     };
     socket.on("checkDisplayName", handleCheckDisplayName);
@@ -21,7 +20,6 @@ const Username = ({ socket }) => {
   };
 
   const checkDisplayName = (e) => {
-    console.log(e.currentTarget.value);
     e.preventDefault();
     setUsername(e.currentTarget.value);
     socket.emit("checkDisplayName", e.currentTarget.value);
