@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const MessageInput = ({socket}) => {
-  const [value, setValue] = useState('');
+const MessageInput = ({ socket, socketUrl }) => {
+  const [value, setValue] = useState("");
   const submitForm = (e) => {
+    console.log(socketUrl);
     e.preventDefault();
-    socket.emit('writeChatMessage', value);
-    setValue('');
+    socket.emit(socketUrl, value);
+    setValue("");
   };
   /* const ekstraStyle = !!value ? "h-12" : "" */
   return (
@@ -24,5 +25,3 @@ const MessageInput = ({socket}) => {
 };
 
 export default MessageInput;
-
-
