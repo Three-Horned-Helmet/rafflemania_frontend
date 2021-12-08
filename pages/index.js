@@ -1,35 +1,34 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import React, {useState, useEffect} from 'react'
-import io from 'socket.io-client'
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 
 function useSocket(url) {
-  const [socket, setSocket] = useState(null)
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketIo = io(url)
+    const socketIo = io(url);
 
-    setSocket(socketIo)
+    setSocket(socketIo);
 
     function cleanup() {
-      socketIo.disconnect()
+      socketIo.disconnect();
     }
-    return cleanup
-  }, [])
+    return cleanup;
+  }, []);
 
-  return socket
+  return socket;
 }
-
 
 export default function Home() {
   const socket = useSocket('http://127.0.0.1:9080')
   const [response, setResponse] = useState("")
 
   useEffect(() => {
-    const handleEvent = (payload)  => {
-      console.log(payload) 
+    const handleEvent = (payload) => {
+      console.log(payload);
       // HelloWorld
-    }
+    };
     if (socket) {
       socket.on('SOME_EVENT', handleEvent)
 
@@ -43,6 +42,7 @@ export default function Home() {
   return (
     <div>
       <Head>
+        <h1>Hei</h1>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -56,6 +56,5 @@ export default function Home() {
         <div>Not Connected</div>
       )}
     </div>
-
-  )
+  );
 }
