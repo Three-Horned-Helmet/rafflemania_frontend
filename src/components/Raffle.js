@@ -8,8 +8,21 @@ const Raffle = ({ socket }) => {
   const [rafflers, setRafflers] = useState([]);
   const [data, setData] = useState({});
 
+  const stringToColor = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = "#";
+    for (let i = 0; i < 3; i++) {
+      let value = (hash >> (i * 8)) & 0xff;
+      color += ("00" + value.toString(16)).substr(-2);
+    }
+    return color;
+  };
+
   useEffect(() => {
-    const messageListener = (data) => {
+    const raffleMessageListener = (data) => {
       setData((prevMessages) => {
         const newMessages = { ...prevMessages };
         newMessages[data.id] = data;
@@ -32,7 +45,7 @@ const Raffle = ({ socket }) => {
     socket.on("tooFewUsers", handleTooFewRaffleUsers);
     socket.on("newRaffle", (data) => toggleRaffle(data, true));
     socket.on("youAreARaffler", () => console.log("youarearaffler")); // You are a raffler
-    socket.on("newChatMessage", messageListener);
+    socket.on("newRaffleMessage", raffleMessageListener);
 
     socket.on("raffleVoteAdded", () => console.log("raffleVoteAdded")); // a user gets a vote
 
@@ -49,7 +62,7 @@ const Raffle = ({ socket }) => {
     return () => {
       socket.off("tooFewUsers", handleTooFewRaffleUsers);
       socket.off("newRaffle", toggleRaffle);
-      socket.off("newChatMessage", messageListener);
+      socket.off("newRaffleMessage", raffleMessageListener);
     };
   }, [socket]);
 
