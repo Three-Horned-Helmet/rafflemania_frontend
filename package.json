@@ -3,10 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "socket.io": "^3.1.2",
-    "socket.io-client": "^3.1.2",
-    "styled-components": "^5.2.1"
+    "start": "next start"
   },
   "dependencies": {
     "next": "latest",
@@ -17,17 +14,6 @@
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4",
-    "babel-plugin-macros": "^3.0.1",
-    "babel-plugin-styled-components": "^1.12.0",
-    "react-is": "^17.0.1",
-    "twin.macro": "^2.3.0"
-  },
-  "babelMacros": {
-    "twin": {
-      "preset": "styled-components"
-    }
+    "tailwindcss": "^2.2.4"
   }
 }
-
-
