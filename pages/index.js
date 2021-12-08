@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import io from 'socket.io-client'
 
 function useSocket(url) {
@@ -15,9 +15,6 @@ function useSocket(url) {
       socketIo.disconnect()
     }
     return cleanup
-
-    // should only run once and not on every re-render,
-    // so pass an empty array
   }, [])
 
   return socket
@@ -28,7 +25,7 @@ export default function Home() {
   const socket = useSocket('http://127.0.0.1:9080')
 
   useEffect(() => {
-    function handleEvent(payload) {
+    const handleEvent = (payload)  => {
       console.log(payload) 
       // HelloWorld
     }
