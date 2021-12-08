@@ -5,7 +5,6 @@ const MessageInput = ({socket}) => {
   const submitForm = (e) => {
     e.preventDefault();
     const b = socket.emit('writeChatMessage', value);
-    console.log(b)
     setValue('');
   };
 
