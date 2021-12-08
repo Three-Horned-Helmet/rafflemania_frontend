@@ -13,8 +13,6 @@ const Messages = ({ socket }) => {
       });
     };
   
-    
-  
     socket.on('newChatMessage', messageListener);
     // socket.on('connected', messageListener);
 
