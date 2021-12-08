@@ -11,6 +11,7 @@ import io from "socket.io-client";
 
 export default function Home() {
   const [socket, setSocket] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const newSocket = io("http://192.168.0.2:5000");
@@ -18,12 +19,21 @@ export default function Home() {
     return () => newSocket.close();
   }, [setSocket]);
 
+  const handleError = (err) => {
+    console.error("ERROR: ",err)
+    setError(err)
+  }
+
+  socket.on("error", handleError)
+  
+
   return (
     <>
       <Head>
         <title>Rafflemania</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {!!error &&<p className="text-red-500">Error: {error}</p>}
       {socket ? (
         <main className=" border-red-500 border-4 h-screen">
           <h1 className="text-center text-5xl">RAFFLEMANIA</h1>
